@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NBA 플레이오프 2026 대진표 예측기 | 브라켓 채우기</title>
+  <meta name="description" content="2026 NBA 플레이오프 대진표를 직접 예측하고 URL로 친구와 공유하세요. 이스턴·웨스턴 컨퍼런스부터 NBA 파이널까지 한눈에!" />
+  <meta name="keywords" content="NBA 플레이오프 2026, NBA 브라켓 예측, NBA 대진표, 농구 브라켓" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="NBA 플레이오프 2026 브라켓 예측기" />
+  <meta property="og:description" content="대진표를 직접 채우고 URL 하나로 친구와 공유!" />
+  <meta property="og:image"       content="https://cdn.nba.com/logos/nba/nba-logoman-75-word_white.svg" />
+  <meta name="twitter:card"       content="summary_large_image" />
+  <meta name="twitter:title"      content="NBA 플레이오프 2026 브라켓 예측기" />
+
+  <!-- Canonical -->
+  <link rel="canonical" href="https://example.com/nba-bracket-2026" />
+
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Styles -->
+  <link rel="stylesheet" href="style.css" />
+
+  <!-- AdSense — 실제 코드로 교체하세요 -->
+  <!-- ADSENSE_HEAD -->
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════ HEADER ═══ -->
+  <header class="site-header">
+    <div class="year-badge">2025–26 SEASON</div>
+    <h1>🏀 NBA 플레이오프 브라켓 예측기</h1>
+    <p>대진표를 직접 채우고 URL로 친구와 공유하세요</p>
+  </header>
+
+  <!-- ═══════════════════════════════ ADSENSE SLOT 1 ═══ -->
+  <div class="ad-slot" aria-hidden="true">
+    <!-- ADSENSE_SLOT_1 -->
+    <span>광고 영역 (AdSense)</span>
+  </div>
+
+  <!-- ═══════════════════════════════════ CONTROLS ═══ -->
+  <div class="controls">
+    <button class="btn btn-primary" id="shareBtn" aria-label="예측 URL 복사">
+      🔗 URL 공유
+    </button>
+    <button class="btn btn-secondary" id="resetBtn" aria-label="전체 초기화">
+      ↺ 초기화
+    </button>
+    <span class="copy-msg" id="copyMsg" role="status">클립보드에 복사됐어요!</span>
+  </div>
+
+  <!-- ═══════════════════════════════ PROGRESS BAR ═══ -->
+  <div class="progress-bar-wrap" role="progressbar" aria-label="예측 진행률">
+    <div class="progress-label">
+      <span id="progressLabel">예측 완료: 0 / 15 경기 (0%)</span>
+    </div>
+    <div class="progress-track">
+      <div class="progress-fill" id="progressFill"></div>
+    </div>
+  </div>
+
+  <!-- ═══════════════════════════════ BRACKET ════════ -->
+  <div class="bracket-scroll">
+    <div class="bracket" role="main" aria-label="NBA 플레이오프 브라켓">
+
+      <!-- ── EAST SIDE ── -->
+      <div class="east-side">
+        <div class="conf-label">이스턴 컨퍼런스</div>
+        <div class="bracket-cols">
+          <!-- East R1 -->
+          <div class="round round-r1" id="eastR1" aria-label="이스턴 1라운드">
+            <!-- JS로 채워짐 -->
+            <div class="matchup skeleton" style="height:104px;border-radius:10px;"></div>
+            <div class="matchup skeleton" style="height:104px;border-radius:10px;margin-top:16px;"></div>
+            <div class="matchup skeleton" style="height:104px;border-radius:10px;margin-top:16px;"></div>
+            <div class="matchup skeleton" style="height:104px;border-radius:10px;margin-top:16px;"></div>
+          </div>
+          <!-- East R2 -->
+          <div class="round round-r2" id="eastR2" aria-label="이스턴 2라운드">
+            <div class="matchup skeleton" style="height:104px;border-radius:10px;"></div>
+            <div class="matchup skeleton" style="height:104px;border-radius:10px;margin-top:136px;"></div>
+          </div>
+          <!-- East CF -->
+          <div class="round round-r3" id="eastR3" aria-label="이스턴 컨퍼런스 파이널">
+            <div class="matchup skeleton" style="height:104px;border-radius:10px;"></div>
+          </div>
+        </div>
+      </div>
+
+      <!-- ── NBA FINALS ── -->
+      <div class="finals-col">
+        <div class="conf-label gold" style="color:#C89B3C;">NBA 파이널</div>
+        <div class="bracket-cols">
+          <div class="round round-fin" id="nbaFinals" aria-label="NBA 파이널">
+            <div class="matchup skeleton" style="height:104px;border-radius:10px;"></div>
+          </div>
+        </div>
+        <!-- Champion display -->
+        <div class="champion-crown" id="championCrown">🏆</div>
+        <div class="champion-name" id="championName"></div>
+      </div>
+
+      <!-- ── WEST SIDE ── -->
+      <div class="west-side">
+        <div class="conf-label">웨스턴 컨퍼런스</div>
+        <div class="bracket-cols">
+          <!-- West CF -->
+          <div class="round round-r3" id="westR3" aria-label="웨스턴 컨퍼런스 파이널">
+            <div class="matchup skeleton" style="height:104px;border-radius:10px;"></div>
+          </div>
+          <!-- West R2 -->
+          <div class="round round-r2" id="westR2" aria-label="웨스턴 2라운드">
+            <div class="matchup skeleton" style="height:104px;border-radius:10px;"></div>
+            <div class="matchup skeleton" style="height:104px;border-radius:10px;margin-top:136px;"></div>
+          </div>
+          <!-- West R1 -->
+          <div class="round round-r1" id="westR1" aria-label="웨스턴 1라운드">
+            <div class="matchup skeleton" style="height:104px;border-radius:10px;"></div>
+            <div class="matchup skeleton" style="height:104px;border-radius:10px;margin-top:16px;"></div>
+            <div class="matchup skeleton" style="height:104px;border-radius:10px;margin-top:16px;"></div>
+            <div class="matchup skeleton" style="height:104px;border-radius:10px;margin-top:16px;"></div>
+          </div>
+        </div>
+      </div>
+
+    </div><!-- /bracket -->
+  </div><!-- /bracket-scroll -->
+
+  <!-- ═══════════════════════════ ADSENSE SLOT 2 (SIDEBAR) ═══ -->
+  <div class="ad-slot" style="max-width:720px;margin:16px auto;" aria-hidden="true">
+    <!-- ADSENSE_SLOT_2 -->
+    <span>광고 영역 (AdSense)</span>
+  </div>
+
+  <!-- ═══════════════════════════════════ FOOTER ═══ -->
+  <footer class="site-footer">
+    <p>팀 데이터는 2025–26 시즌 기준 추정치입니다. 실제 플레이오프 확정 시 업데이트됩니다.</p>
+    <p style="margin-top:4px;">NBA 플레이오프 2026 시작: 약 2026년 4월 19일</p>
+  </footer>
+
+  <!-- Scripts -->
+  <script src="teams.js"></script>
+  <script src="app.js"></script>
+
+</body>
+</html>

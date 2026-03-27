@@ -1,0 +1,466 @@
+/* ===== Design Tokens ===== */
+:root {
+  --bg:           #0A1628;
+  --surface:      #0f1f3d;
+  --surface2:     #162240;
+  --gold:         #C89B3C;
+  --gold-dim:     rgba(200, 155, 60, 0.35);
+  --gold-glow:    rgba(200, 155, 60, 0.12);
+  --text:         #e8ecf4;
+  --text-dim:     #7a8aaa;
+  --winner-bg:    rgba(200, 155, 60, 0.18);
+  --winner-border:#C89B3C;
+  --loser-text:   #4a5a7a;
+  --connector:    rgba(200, 155, 60, 0.3);
+  --radius:       10px;
+  --card-h:       52px;
+}
+
+/* ===== Reset & Base ===== */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: 'Noto Sans KR', 'Apple SD Gothic Neo', sans-serif;
+  font-size: 14px;
+  min-height: 100vh;
+  overflow-x: auto;
+}
+
+/* ===== Layout ===== */
+.site-header {
+  text-align: center;
+  padding: 24px 16px 16px;
+  border-bottom: 1px solid rgba(200,155,60,0.15);
+  background: linear-gradient(180deg, rgba(200,155,60,0.05) 0%, transparent 100%);
+}
+.site-header h1 {
+  font-size: clamp(18px, 4vw, 28px);
+  font-weight: 700;
+  letter-spacing: -0.3px;
+  color: var(--gold);
+}
+.site-header p {
+  margin-top: 4px;
+  color: var(--text-dim);
+  font-size: 13px;
+}
+.year-badge {
+  display: inline-block;
+  background: var(--gold);
+  color: var(--bg);
+  font-size: 11px;
+  font-weight: 700;
+  padding: 2px 8px;
+  border-radius: 20px;
+  margin-bottom: 6px;
+  letter-spacing: 1px;
+}
+
+/* ===== AdSense Slots ===== */
+.ad-slot {
+  width: 100%;
+  min-height: 60px;
+  background: rgba(255,255,255,0.03);
+  border: 1px dashed rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-dim);
+  font-size: 11px;
+  letter-spacing: 1px;
+}
+
+/* ===== Controls ===== */
+.controls {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  flex-wrap: wrap;
+}
+.btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 18px;
+  border-radius: 8px;
+  border: none;
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+}
+.btn-primary {
+  background: var(--gold);
+  color: #0A1628;
+}
+.btn-primary:hover { background: #d4a845; transform: translateY(-1px); }
+.btn-secondary {
+  background: var(--surface2);
+  color: var(--text-dim);
+  border: 1px solid rgba(255,255,255,0.08);
+}
+.btn-secondary:hover { color: var(--text); border-color: var(--gold-dim); }
+
+.copy-msg {
+  font-size: 12px;
+  color: var(--gold);
+  opacity: 0;
+  transition: opacity 0.3s;
+  pointer-events: none;
+}
+.copy-msg.show { opacity: 1; }
+
+/* ===== Progress Bar ===== */
+.progress-bar-wrap {
+  padding: 0 24px 12px;
+  max-width: 400px;
+  margin: 0 auto;
+}
+.progress-label {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  color: var(--text-dim);
+  margin-bottom: 6px;
+}
+.progress-track {
+  height: 4px;
+  background: var(--surface2);
+  border-radius: 2px;
+  overflow: hidden;
+}
+.progress-fill {
+  height: 100%;
+  background: var(--gold);
+  border-radius: 2px;
+  transition: width 0.4s ease;
+  width: 0%;
+}
+
+/* ===== Round Labels ===== */
+.round-labels {
+  display: flex;
+  justify-content: center;
+  gap: 0;
+  padding: 0 24px 8px;
+  min-width: 900px;
+  overflow-x: hidden;
+}
+.round-label {
+  flex: 1;
+  text-align: center;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.5px;
+  color: var(--text-dim);
+  text-transform: uppercase;
+}
+.round-label.gold { color: var(--gold); }
+
+/* ===== Bracket Outer ===== */
+.bracket-scroll {
+  overflow-x: auto;
+  padding: 0 16px 32px;
+  -webkit-overflow-scrolling: touch;
+}
+.bracket {
+  display: flex;
+  align-items: flex-start;
+  gap: 0;
+  min-width: 900px;
+  padding: 8px 0 24px;
+}
+
+/* Conference side containers */
+.east-side,
+.west-side {
+  flex: 3;
+  display: flex;
+  flex-direction: column;
+}
+.east-side .bracket-cols {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+.west-side .bracket-cols {
+  display: flex;
+  flex-direction: row;
+  flex: 1;
+}
+.finals-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 120px;
+}
+.finals-col .bracket-cols {
+  width: 100%;
+}
+
+/* ===== Round Columns ===== */
+.round {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  position: relative;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+/* Padding-top offsets to visually align rounds */
+.round-r1  { padding-top: 0; }
+.round-r2  { padding-top: 60px; }
+.round-r3  { padding-top: 180px; }
+.round-fin { padding-top: 180px; }
+
+/* Gaps between matchups within each round */
+.round-r1  .matchup + .matchup { margin-top: 16px; }
+.round-r2  .matchup + .matchup { margin-top: 136px; }
+.round-r3  .matchup + .matchup { margin-top: 0; }
+
+/* ===== Matchup Card ===== */
+.matchup {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-radius: var(--radius);
+  overflow: visible;
+}
+
+/* Connector bracket "]" on East side (right side of matchup) */
+.east-side .round-r1 .matchup::after,
+.east-side .round-r2 .matchup::after {
+  content: '';
+  position: absolute;
+  right: -17px;
+  top: calc(var(--card-h) / 2);
+  height: var(--card-h);
+  width: 16px;
+  border-right: 1px solid var(--connector);
+  border-top: 1px solid var(--connector);
+  border-bottom: 1px solid var(--connector);
+  pointer-events: none;
+}
+/* Connector "[" on West side (left side of matchup) */
+.west-side .round-r1 .matchup::after,
+.west-side .round-r2 .matchup::after {
+  content: '';
+  position: absolute;
+  left: -17px;
+  top: calc(var(--card-h) / 2);
+  height: var(--card-h);
+  width: 16px;
+  border-left: 1px solid var(--connector);
+  border-top: 1px solid var(--connector);
+  border-bottom: 1px solid var(--connector);
+  pointer-events: none;
+}
+
+/* ===== Team Card ===== */
+.team-card {
+  height: var(--card-h);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 0 10px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.15s, opacity 0.2s;
+  background: var(--surface);
+  border: 1px solid rgba(255,255,255,0.06);
+  position: relative;
+}
+.team-card:first-child {
+  border-radius: var(--radius) var(--radius) 0 0;
+  border-bottom: none;
+}
+.team-card:last-child {
+  border-radius: 0 0 var(--radius) var(--radius);
+}
+.team-card:hover:not(.tbd):not(.loser) {
+  background: var(--surface2);
+  border-color: var(--gold-dim);
+  z-index: 1;
+}
+.team-card.winner {
+  background: var(--winner-bg);
+  border-color: var(--winner-border);
+  z-index: 2;
+}
+.team-card.loser {
+  opacity: 0.45;
+  cursor: default;
+}
+.team-card.tbd {
+  cursor: default;
+  opacity: 0.4;
+}
+
+/* Seed badge */
+.seed {
+  min-width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  font-weight: 700;
+  color: var(--text-dim);
+  flex-shrink: 0;
+}
+.team-card.winner .seed {
+  background: var(--gold);
+  color: var(--bg);
+}
+
+/* Team color dot */
+.team-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Team name */
+.team-name {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+}
+.team-name .kor {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+.team-name .eng {
+  display: block;
+  font-size: 10px;
+  color: var(--text-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  line-height: 1.3;
+}
+.team-card.tbd .team-name .kor { color: var(--text-dim); }
+
+/* Winner checkmark */
+.win-icon {
+  font-size: 13px;
+  color: var(--gold);
+  flex-shrink: 0;
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.team-card.winner .win-icon { opacity: 1; }
+
+/* Divider between two cards */
+.matchup-divider {
+  height: 1px;
+  background: rgba(255,255,255,0.06);
+  flex-shrink: 0;
+}
+
+/* ===== Conference labels ===== */
+.conf-label {
+  text-align: center;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 1.5px;
+  text-transform: uppercase;
+  color: var(--text-dim);
+  padding-bottom: 8px;
+}
+.east-side .conf-label { color: #5b9bd5; }
+.west-side .conf-label { color: #d55b5b; }
+
+/* Finals section styling */
+.round-fin .matchup {
+  border: 1px solid var(--gold-dim);
+  border-radius: var(--radius);
+  background: rgba(200,155,60,0.04);
+}
+.round-fin .team-card {
+  background: transparent;
+  border: none;
+}
+.round-fin .team-card:first-child { border-bottom: 1px solid rgba(200,155,60,0.15); border-radius: var(--radius) var(--radius) 0 0; }
+.round-fin .team-card:last-child  { border-radius: 0 0 var(--radius) var(--radius); }
+
+/* Trophy for champion */
+.champion-crown {
+  text-align: center;
+  padding: 12px 0 0;
+  font-size: 22px;
+  opacity: 0;
+  transition: opacity 0.4s;
+  min-width: 0;
+}
+.champion-crown.show { opacity: 1; }
+.champion-name {
+  font-size: 11px;
+  color: var(--gold);
+  font-weight: 700;
+  text-align: center;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  padding: 0 4px;
+}
+
+/* ===== Skeleton Loader ===== */
+.skeleton {
+  background: linear-gradient(90deg, var(--surface) 25%, var(--surface2) 50%, var(--surface) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s infinite;
+  border-radius: 4px;
+}
+@keyframes shimmer {
+  0%   { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ===== Footer ===== */
+.site-footer {
+  text-align: center;
+  padding: 20px 16px;
+  font-size: 11px;
+  color: var(--text-dim);
+  border-top: 1px solid rgba(255,255,255,0.04);
+}
+.site-footer a { color: var(--gold-dim); text-decoration: none; }
+
+/* ===== Responsive: Mobile ===== */
+@media (max-width: 899px) {
+  .bracket-scroll { padding: 0 8px 32px; }
+  .bracket { min-width: 860px; }
+  .round-label { font-size: 9px; }
+  .team-name .kor { font-size: 11px; }
+  .team-name .eng { display: none; }
+  :root { --card-h: 48px; }
+  .round-r2  { padding-top: 56px; }
+  .round-r3  { padding-top: 168px; }
+  .round-fin { padding-top: 168px; }
+  .round-r1  .matchup + .matchup { margin-top: 12px; }
+  .round-r2  .matchup + .matchup { margin-top: 124px; }
+}
+
+/* Scrollbar styling */
+.bracket-scroll::-webkit-scrollbar { height: 4px; }
+.bracket-scroll::-webkit-scrollbar-track { background: transparent; }
+.bracket-scroll::-webkit-scrollbar-thumb { background: var(--gold-dim); border-radius: 2px; }
